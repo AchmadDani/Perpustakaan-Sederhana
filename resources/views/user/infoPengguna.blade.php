@@ -13,11 +13,11 @@
                     <table class="table-auto">
                         <tr>
                             <td class="font-semibold">fullname:</td>
-                            <td>{{ $users->fullname }}</td>
+                            <td>{{ $user->fullname }}</td>
                         </tr>
                         <tr>   {{-- Achmad Dani Saputra | 6706223131 --}}
                             <td class="font-semibold">email:</td>
-                            <td>{{ $users->email }}</td>
+                            <td>{{ $user->email }}</td>
                         </tr>
                         <!-- Tambahkan informasi pengguna lainnya sesuai kebutuhan -->
                     </table>
