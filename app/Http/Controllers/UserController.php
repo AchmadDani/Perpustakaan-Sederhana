@@ -37,11 +37,10 @@ class UserController extends Controller
         return view('user.registrasi');
     }
 
-    public function show(User $id)
-{
-    $user = User::find($id); //mengambil data by id
-    return view('user.infoPengguna', compact('users'));
-}
+     public function show(User $user)
+    {
+        return view('user.infoPengguna', compact('user'));
+    }
 // $users = User::all(); // Mengambil semua data dari database
 
     
