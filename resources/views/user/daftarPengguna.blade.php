@@ -24,7 +24,7 @@
                                     <th>ID</th>
                                     <th>fullname</th>
                                     <th>Email</th>
-                                    <th>Lihat Detail</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                         </table>
@@ -49,7 +49,7 @@
                 {
                     data: null,
                     render: function (data) {
-                        return '<a href="' + "{{ route('user.infoPengguna', '') }}" + '/' + data.id + '"><i class="bi bi-eye"></i></a>';
+                        return '<a href="' + "{{ route('user.infoPengguna', '') }}" + '/' + data.id + '"><i class="bi bi-pencil-square"></i></a>';
                     },
                     orderable: false,
                     searchable: false

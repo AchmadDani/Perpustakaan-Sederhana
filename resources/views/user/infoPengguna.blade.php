@@ -13,16 +13,24 @@
                     <table class="table-auto">
                         <tr>
                             <td class="font-semibold">fullname:</td>
-                            <td>{{ $users->fullname }}</td>
+                            <td>{{ $user->fullname }}</td>
                         </tr>
                         <tr>   {{-- Achmad Dani Saputra | 6706223131 --}}
                             <td class="font-semibold">email:</td>
-                            <td>{{ $users->email }}</td>
+                            <td>{{ $user->email }}</td>
                         </tr>
+                        <tr>
+                            <td class="font-semibold">tgl dibuat:</td>
+                            <td>{{ $user->created_at }}</td>
+                        </tr>
+                        
                         <!-- Tambahkan informasi pengguna lainnya sesuai kebutuhan -->
                     </table>
 
-                    <a href="{{ route('user.daftarPengguna') }}" class="text-blue-500 hover:underline">Kembali ke Daftar Pengguna</a>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('user.daftarPengguna') }}" class="text-white no-underline">Kembali ke Daftar Pengguna</a>
+                    </button>
+                    
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@
                         <th>Nama Koleksi</th>
                         <th>Jenis Koleksi</th>
                         <th>Jumlah Koleksi</th>
-                        <th>Lihat Detail</th> <!-- Tambahkan kolom "View" -->
+                        <th>Edit</th> <!-- Tambahkan kolom "View" -->
                     </tr>
                 </thead>
             </table>
@@ -66,7 +66,7 @@
             {
                     data: null,
                     render: function (data) {
-                        return '<a href="' + "{{ route('koleksi.infoKoleksi', '') }}" + '/' + data.id + '"><i class="bi bi-eye"></i></a>';
+                        return '<a href="' + "{{ route('koleksi.infoKoleksi', '') }}" + '/' + data.id + '"><i class="bi bi-pencil-square"></i></a>';
                     },
                     orderable: false,
                     searchable: false

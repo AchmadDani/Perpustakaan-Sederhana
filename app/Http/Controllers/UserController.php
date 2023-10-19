@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Yajra\DataTables\DataTables;
-// use Datatables;
 use App\Models\User;
+// use Datatables;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -37,14 +38,34 @@ class UserController extends Controller
         return view('user.registrasi');
     }
 
-    public function show(User $id)
-{
-    $user = User::find($id); //mengambil data by id
-    return view('user.infoPengguna', compact('users'));
-}
-// $users = User::all(); // Mengambil semua data dari database
+    public function update(Request $request, User $users)
+    {
+        $request->validate([
+            'username' => 'required',
+            'fullname' => 'required',
+            'email' => 'required|email',
+            // 'password' => 'nullable|min:8',
+            'address' => 'required',
+            'birthdate' => 'required|date',
+            'phoneNumber' => 'required',
+            'agama' => 'required',
+            'jenisKelamin' => 'required|in:0,1',
+        ]);
+        // Perbarui data user dengan data yang dikirimkan dari formulir
+        $affacted = DB::table('users')->where('id', $request->id)->update([
+            'fullname' => $request->fullname,
+            'phoneNumber' => $request->phoneNumber,
+            'address' => $request->address,
+        ]
+        );
+        // Redirect ke halaman yang sesuai, misalnya, halaman daftar koleksi
+        return redirect()->route('user.daftarPengguna')->with('success', 'Pengguna berhasil diperbarui.');
+    }
 
-    
+    public function show(User $user)
+    {
+        return view('user.editPengguna', compact('user'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -80,10 +101,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -98,13 +119,21 @@ class UserController extends Controller
 }
 
 
+//CATATAN
+
+
+//     public function show(User $id)
+// {
+//     $user = User::find($id); //mengambil data by id
+//     return view('user.infoPengguna', compact('users'));
+// }
+// $users = User::all(); // Mengambil semua data dari database
+
+
   //Datatables
     // public function index() {
     //     $users = User::all();
     //     return view('user.daftarPengguna', compact('users'));
     // }
 
-  // public function show(User $user)
-    // {
-    //     return view('user.infoPengguna', compact('user'));
-    // }
+  

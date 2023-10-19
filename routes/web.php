@@ -28,17 +28,26 @@ Route::get('/dashboard', function () {
 
 // Tugas
 // Achmad Dani Saputra | 6706223131
-Route::get('/user', [UserController::class, 'index'])->name('user.daftarPengguna');
-Route::get('/getData', [UserController::class, 'getData'])->name('user.getData'); //get data yajra
-Route::get('/getKoleksi', [CollectionController::class, 'getKoleksi'])->name('getKoleksi'); // get data yajra
-Route::post('/userRegistration', [UserController::class, 'create'])->name('user.registrasi');
-Route::get('/userView/{user}', [UserController::class, 'show'])->name('user.infoPengguna');
+
+//Menampilkan data
+Route::get('/user', [UserController::class, 'index'])->name('user.daftarPengguna'); //menampilkan return view blade
 Route::get('/koleksi', [CollectionController::class, 'index'])->name('koleksi.daftarKoleksi');
-Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.store');
+
+//Route khusus mengambil data (tanpa view)
+Route::get('/getData', [UserController::class, 'getData'])->name('user.getData');
+Route::get('/getKoleksi', [CollectionController::class, 'getKoleksi'])->name('getKoleksi'); // get data yajra
+
+//Add User & Koleksi
 Route::get('/koleksiTambah', [CollectionController::class, 'create'])->name('koleksi.registrasi');
-Route::get('/koleksiView/{collection}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
+Route::post('/koleksiStore', [CollectionController::class, 'store'])->name('koleksi.store'); //menyimpan data setelah di tambah
 
+//Show user & Koleksi by ID
+Route::get('/koleksiView/{koleksi}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
+Route::get('/userView/{user}', [UserController::class, 'show'])->name('user.infoPengguna');
 
+//Update
+Route::put('/koleksiUpdate', [CollectionController::class, 'update'])->name('koleksi.update');
+Route::put('/userUpdate', [UserController::class, 'update'])->name('user.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -47,3 +56,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+// Route::post('/userRegistration', [UserController::class, 'create'])->name('user.registrasi');
