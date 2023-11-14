@@ -18,7 +18,7 @@ class CollectionController extends Controller
         $data = Koleksi::all();
         return Datatables::of($data)->make(true);
     }
-                 // Achmad Dani Saputra | 6706223131
+
     public function create()
     {
         return view('koleksi.registrasi');
@@ -26,7 +26,7 @@ class CollectionController extends Controller
 
     public function show(Koleksi $koleksi) //tampilan view buat ngedit
     {
-        return view('koleksi.editKoleksi', compact('koleksi'));
+        return view('koleksi.infoKoleksi', compact('koleksi'));
     }
 
     public function update(Request $request, Koleksi $koleksi) //controller buat edit
@@ -41,7 +41,8 @@ class CollectionController extends Controller
     
     $affacted = DB::table('koleksi')->where('id', $request->id)->update([
         'namaKoleksi' => $request->namaKoleksi,
-        'jenisKoleksi' => $request->jenisKoleksi,
+        'jenisKoleksi' => $request->jenisKoleksi,   // Achmad Dani Saputra | 6706223131
+        'jumlahKoleksi' => $request->jumlahKoleksi,
     ]
     );
     // Redirect ke halaman yang sesuai, misalnya, halaman daftar koleksi
@@ -68,9 +69,11 @@ class CollectionController extends Controller
     return redirect()->route('koleksi.daftarKoleksi');
         // return redirect()->route('koleksi.registrasi')->with('success', 'Koleksi telah ditambahkan.');
     }
-}
 
-    // public function index() {
-    //     $koleksi = Koleksi::all();
-    //     return view('koleksi.daftarKoleksi', compact('koleksi'));
-    // }
+
+    public function destroy(Koleksi $koleksi)
+    {
+        $koleksi->delete();
+    }
+
+}

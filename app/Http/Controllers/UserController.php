@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -25,9 +26,6 @@ class UserController extends Controller
         $data = User::all();
         return Datatables::of($data)->make(true);
     }
-
-    // Achmad Dani Saputra | 6706223131
-    
     /**
      * Show the form for creating a new resource.
      *
@@ -37,14 +35,14 @@ class UserController extends Controller
     {
         return view('user.registrasi');
     }
-
+    // Achmad Dani Saputra | 6706223131
     public function update(Request $request, User $users)
     {
         $request->validate([
             'username' => 'required',
             'fullname' => 'required',
             'email' => 'required|email',
-            // 'password' => 'nullable|min:8',
+            'password' => 'required|min:8',
             'address' => 'required',
             'birthdate' => 'required|date',
             'phoneNumber' => 'required',
@@ -54,8 +52,9 @@ class UserController extends Controller
         // Perbarui data user dengan data yang dikirimkan dari formulir
         $affacted = DB::table('users')->where('id', $request->id)->update([
             'fullname' => $request->fullname,
-            'phoneNumber' => $request->phoneNumber,
+            'password' => Hash::make($request->password),
             'address' => $request->address,
+            'phoneNumber' => $request->phoneNumber,
         ]
         );
         // Redirect ke halaman yang sesuai, misalnya, halaman daftar koleksi
@@ -64,7 +63,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('user.editPengguna', compact('user'));
+        return view('user.infoPengguna', compact('user'));
     }
     /**
      * Store a newly created resource in storage.

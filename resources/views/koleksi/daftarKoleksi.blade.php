@@ -27,6 +27,7 @@
                         <th>Jenis Koleksi</th>
                         <th>Jumlah Koleksi</th>
                         <th>Edit</th> <!-- Tambahkan kolom "View" -->
+                        <th>Delete</th> <!-- Tambahkan kolom "View" -->
                     </tr>
                 </thead>
             </table>
@@ -70,6 +71,14 @@
                     },
                     orderable: false,
                     searchable: false
+                },
+            {
+                    data: null,
+                    render: function (data) {//untuk delete
+                        return '<a href="' + "{{ route('koleksi.deleteKoleksi', '') }}" + '/' + data.id + '"><i class="bi bi-x-square"></i></a>';
+                    },
+                    orderable: false,
+                    searchable: false
                 }
         ]
     });
@@ -78,7 +87,7 @@
 </body>
 </html>
 
-
+{{-- dattables tanpa yajra --}}
 {{-- $(document).ready( function() {
     $('#myTable').DataTable();
 }) --}}
